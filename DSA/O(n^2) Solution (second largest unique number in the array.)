@@ -1,0 +1,39 @@
+public class SecondLargestUniqueN2 {
+    public static int secondLargestUnique(int[] nums) {
+        if (nums == null || nums.length == 0) return -1;
+        int n = nums.length;
+        int[] unique = new int[n];
+        int uniqueCount = 0;
+
+        for (int i = 0; i < n; i++) {
+            boolean isUnique = true;
+            for (int j = 0; j < n; j++) {
+                if (i != j && nums[i] == nums[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+
+            if (isUnique) {
+                unique[uniqueCount++] = nums[i];
+            }
+        }
+
+        if (uniqueCount < 2) return -1;
+        int largest = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+        for (int i = 0; i < uniqueCount; i++) {
+            if (unique[i] > largest) {
+                second = largest;
+                largest = unique[i];
+            } else if (unique[i] > second) {
+                second = unique[i];
+            }
+        }
+        return second == Integer.MIN_VALUE ? -1 : second;
+    }
+    public static void main(String[] args) {
+        System.out.println(secondLargestUnique(new int[]{3, 5, 2, 5, 6, 6, 1})); 
+        System.out.println(secondLargestUnique(new int[]{7, 7, 7}));             
+    }
+}
