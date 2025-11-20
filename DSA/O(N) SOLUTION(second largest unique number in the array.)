@@ -1,0 +1,22 @@
+class Solution {
+    public int secondLargestElement(int[] nums) {
+        int firstLargest=Integer.MIN_VALUE;
+        int secondLargest=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>firstLargest){
+                secondLargest=firstLargest;
+                firstLargest=nums[i];
+                
+            }
+            else if(nums[i]>secondLargest && nums[i]!=firstLargest){
+                secondLargest=nums[i];
+
+            }
+        }
+       if (secondLargest == Integer.MIN_VALUE || secondLargest == firstLargest) {
+            return -1;
+        }
+
+        return secondLargest;
+    }
+}
